@@ -713,6 +713,150 @@
     @media (max-width: 768px) { :root { --section-y: 88px; --pad-x: 24px; } }
 
     /* ════════════════════════
+       PARTNERS — OFF-WHITE
+    ════════════════════════ */
+    #partners {
+      background: var(--off-white);
+      border-top: 1px solid rgba(0,0,0,0.07);
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+      padding: 56px 0;
+    }
+    .partners-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--pad-x); }
+    .partners-label {
+      text-align: center;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-muted-light); margin-bottom: 36px;
+    }
+    .partners-grid {
+      display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; align-items: center;
+    }
+    .partner-pill {
+      display: inline-flex; align-items: center;
+      padding: 10px 22px;
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 9999px;
+      background: var(--white);
+      font-size: 13px; font-weight: 600; color: rgba(0,0,0,0.55);
+      letter-spacing: -0.01em;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .partner-pill:hover { border-color: rgba(0,0,0,0.25); color: var(--black); }
+
+    /* ════════════════════════
+       USE CASES — WHITE
+    ════════════════════════ */
+    #use-cases {
+      background: var(--white);
+      padding: var(--section-y) 0;
+      border-top: 1px solid rgba(0,0,0,0.07);
+    }
+    .uc-wrap { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--pad-x); }
+    .uc-top { max-width: 700px; margin-bottom: 72px; }
+    .uc-top h2 { margin-top: 14px; margin-bottom: 20px; }
+    .uc-top p { font-size: 15px; color: var(--text-muted-light); line-height: 1.75; }
+    .uc-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .uc-card {
+      background: var(--gray-light);
+      border-radius: 20px; padding: 36px 32px;
+      display: flex; flex-direction: column; gap: 16px;
+      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
+      position: relative; overflow: hidden;
+    }
+    .uc-card:hover { transform: translateY(-4px); }
+    .uc-card-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 11px; font-weight: 400; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--blue);
+    }
+    .uc-card h3 { font-size: 22px; letter-spacing: -0.03em; line-height: 1.2; }
+    .uc-card p { font-size: 14px; color: var(--text-muted-light); line-height: 1.75; flex: 1; }
+    .uc-card-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: var(--black); display: flex; align-items: center; justify-content: center;
+      margin-bottom: 4px;
+    }
+    .uc-card-icon svg { width: 22px; height: 22px; stroke: var(--white); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    @media (max-width: 768px) { .uc-grid { grid-template-columns: 1fr; } }
+
+    /* ════════════════════════
+       SECURITY — BLACK
+    ════════════════════════ */
+    #security {
+      background: var(--black);
+      padding: var(--section-y) 0;
+    }
+    .sec-wrap { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--pad-x); }
+    .sec-top {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+      margin-bottom: 72px; align-items: end;
+    }
+    .sec-top-left h2 { color: var(--white); margin-top: 16px; }
+    .sec-top-right { display: flex; flex-direction: column; gap: 24px; justify-content: flex-end; }
+    .sec-top-right p { font-size: 15px; color: var(--text-muted-dark); line-height: 1.75; }
+    .sec-badges { display: flex; gap: 12px; flex-wrap: wrap; }
+    .sec-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.14);
+      color: var(--white); font-size: 11.5px; font-weight: 700;
+      letter-spacing: 0.04em; padding: 8px 18px; border-radius: 9999px;
+    }
+    .sec-badge::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: #22d16b; flex-shrink: 0;
+    }
+    .sec-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .sec-card {
+      background: var(--card-dark); border-radius: 16px; padding: 28px 28px 32px;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: border-color 0.2s;
+    }
+    .sec-card:hover { border-color: rgba(255,255,255,0.14); }
+    .sec-card-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      background: rgba(0,56,255,0.18); border: 1px solid rgba(0,56,255,0.3);
+      display: flex; align-items: center; justify-content: center; margin-bottom: 20px;
+    }
+    .sec-card-icon svg { width: 20px; height: 20px; stroke: #6b8cff; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .sec-card h3 { color: var(--white); margin-bottom: 10px; font-size: 18px; letter-spacing: -0.02em; }
+    .sec-card p { font-size: 14px; color: var(--text-muted-dark); line-height: 1.7; }
+    @media (max-width: 860px) {
+      .sec-top { grid-template-columns: 1fr; gap: 32px; }
+      .sec-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ════════════════════════
+       TESTIMONIALS — WHITE
+    ════════════════════════ */
+    #testimonials {
+      background: var(--white);
+      padding: var(--section-y) 0;
+      border-top: 1px solid rgba(0,0,0,0.07);
+    }
+    .test-wrap { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--pad-x); }
+    .test-top { max-width: 600px; margin-bottom: 64px; }
+    .test-top h2 { margin-top: 14px; }
+    .test-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .test-card {
+      background: var(--gray-light); border-radius: 20px; padding: 36px 28px;
+      display: flex; flex-direction: column; gap: 20px;
+      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
+    }
+    .test-card:hover { transform: translateY(-4px); }
+    .test-stars { display: flex; gap: 3px; }
+    .test-star { width: 16px; height: 16px; fill: var(--blue); }
+    .test-quote {
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px; line-height: 1.5; letter-spacing: -0.02em;
+      color: var(--black); flex: 1;
+    }
+    .test-quote::before { content: '\201C'; }
+    .test-quote::after { content: '\201D'; }
+    .test-attr { display: flex; flex-direction: column; gap: 3px; }
+    .test-name { font-size: 13px; font-weight: 700; color: var(--black); letter-spacing: -0.01em; }
+    .test-role { font-size: 11.5px; color: var(--text-muted-light); font-weight: 500; letter-spacing: 0.02em; }
+    @media (max-width: 860px) { .test-grid { grid-template-columns: 1fr; } }
+
+    /* ════════════════════════
        CONTACT — OFF-WHITE
     ════════════════════════ */
     #contact {
@@ -826,6 +970,25 @@
     <div class="stat-cell reveal" style="transition-delay:0.3s">
       <div class="stat-val"><span>6</span>×</div>
       <div class="stat-label">Faster Procurement Cycles</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════ PARTNERS ════════════════════════════ -->
+<div id="partners">
+  <div class="partners-inner">
+    <p class="partners-label">Trusted by Industry Leaders</p>
+    <div class="partners-grid">
+      <span class="partner-pill">Toyota</span>
+      <span class="partner-pill">Cisco</span>
+      <span class="partner-pill">Pentax</span>
+      <span class="partner-pill">EnerSys</span>
+      <span class="partner-pill">Teledyne</span>
+      <span class="partner-pill">Thermo King</span>
+      <span class="partner-pill">Qualus</span>
+      <span class="partner-pill">Taiga</span>
+      <span class="partner-pill">TSI</span>
+      <span class="partner-pill">Utility</span>
     </div>
   </div>
 </div>
@@ -1060,6 +1223,68 @@
   </div>
 </section>
 
+<!-- ════════════════════════════ USE CASES ════════════════════════════ -->
+<section id="use-cases">
+  <div class="uc-wrap">
+    <div class="uc-top reveal">
+      <span class="tag-pill outline-dark">Platform Capabilities</span>
+      <h2>Four systems,<br>one unified workflow</h2>
+      <p>From opportunity discovery through contract fulfillment — our AI agents handle every step of energy and infrastructure procurement, autonomously and at scale.</p>
+    </div>
+    <div class="uc-grid">
+
+      <div class="uc-card reveal">
+        <div class="uc-card-icon">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </div>
+        <div class="uc-card-num">01 — Opportunity Scan</div>
+        <h3>Intelligent RFP Discovery</h3>
+        <p>Continuously monitors thousands of federal, municipal, and private procurement sources — from energy grid modernization RFPs to infrastructure procurement opportunities — surfacing the highest-fit tenders before your competitors find them. Autonomous sourcing agents apply intelligent reasoning at scale to score and prioritize opportunities.</p>
+        <a href="#contact" class="arrow-link on-light" style="margin-top:8px">
+          Learn more <span class="arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </a>
+      </div>
+
+      <div class="uc-card reveal" style="transition-delay:0.1s">
+        <div class="uc-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        </div>
+        <div class="uc-card-num">02 — Smart Bundler</div>
+        <h3>AI-Powered Solution Integration</h3>
+        <p>Intelligently combines complementary energy solutions into cohesive infrastructure packages — matching grid modernization technologies, supplier capabilities, and regulatory requirements into winning proposal structures. Optimizes for ESG &amp; sustainability compliance and supplier engagement optimization across multi-vendor bids.</p>
+        <a href="#contact" class="arrow-link on-light" style="margin-top:8px">
+          Learn more <span class="arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </a>
+      </div>
+
+      <div class="uc-card reveal" style="transition-delay:0.15s">
+        <div class="uc-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <div class="uc-card-num">03 — Bid Assembly</div>
+        <h3>Automated Compliant Proposals</h3>
+        <p>Generates fully compliant bid packages automatically — pulling pricing data, populating technical documentation, applying federal &amp; municipal sourcing rules, and producing complete audit trails. Reduces proposal preparation from weeks to hours while ensuring regulatory compliance across defense &amp; infrastructure contracts.</p>
+        <a href="#contact" class="arrow-link on-light" style="margin-top:8px">
+          Learn more <span class="arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </a>
+      </div>
+
+      <div class="uc-card reveal" style="transition-delay:0.2s">
+        <div class="uc-card-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="uc-card-num">04 — Orchestration</div>
+        <h3>End-to-End Workflow Automation</h3>
+        <p>Full procurement digitalization from opportunity capture through vendor coordination and contract fulfillment. Autonomous agents manage timelines, trigger approvals, coordinate supplier engagement, and surface compliance flags — giving procurement teams real-time visibility into every active opportunity without the manual overhead.</p>
+        <a href="#contact" class="arrow-link on-light" style="margin-top:8px">
+          Learn more <span class="arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- ════════════════════════════ ABOUT / TEAM ════════════════════════════ -->
 <section id="about">
   <div class="about-wrap">
@@ -1206,6 +1431,118 @@
         </div>
         <h3>Deployed in Weeks</h3>
         <p>From technical audit to production in 6–8 weeks. No 200-slide decks. No armies of junior consultants. We ship working systems that run 24/7 — then make them smarter.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════ SECURITY ════════════════════════════ -->
+<section id="security">
+  <div class="sec-wrap">
+    <div class="sec-top">
+      <div class="sec-top-left reveal">
+        <span class="tag-pill outline">Enterprise Security</span>
+        <h2>Enterprise-Grade<br>Security</h2>
+      </div>
+      <div class="sec-top-right reveal" style="transition-delay:0.15s">
+        <p>Built for government contractors and regulated energy enterprises. Our infrastructure meets the most stringent federal compliance frameworks so your data never leaves your control.</p>
+        <div class="sec-badges">
+          <span class="sec-badge">SOC 2 Type II</span>
+          <span class="sec-badge">NIST 800-53</span>
+        </div>
+      </div>
+    </div>
+    <div class="sec-grid">
+
+      <div class="sec-card reveal">
+        <div class="sec-card-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <h3>Customer Workflow Isolation</h3>
+        <p>Strong separation between customer environments — your workflows, data, and agent decisions are fully isolated. No cross-tenant data access, no shared processing queues. Each client's operations run in a dedicated, sandboxed context.</p>
+      </div>
+
+      <div class="sec-card reveal" style="transition-delay:0.1s">
+        <div class="sec-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Data Encryption</h3>
+        <p>TLS 1.2+ for all data in transit across every API endpoint and agent communication channel. All stored data encrypted at rest using AES-256. Encryption keys managed per-customer with automatic rotation and full audit logging.</p>
+      </div>
+
+      <div class="sec-card reveal" style="transition-delay:0.15s">
+        <div class="sec-card-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <h3>Cloud-Based Infrastructure</h3>
+        <p>Fully NIST 800-53 and SOC 2 Type II compliant infrastructure. Designed for federal and defense procurement environments with continuous compliance monitoring, vulnerability scanning, and penetration testing on every release cycle.</p>
+      </div>
+
+      <div class="sec-card reveal" style="transition-delay:0.2s">
+        <div class="sec-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <h3>Secured Access Control</h3>
+        <p>SSO integration via SAML 2.0 and OIDC — your team authenticates through your existing identity provider with no credential management overhead. Role-based access controls, session timeouts, and MFA enforcement built in as standard.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════ TESTIMONIALS ════════════════════════════ -->
+<section id="testimonials">
+  <div class="test-wrap">
+    <div class="test-top reveal">
+      <span class="tag-pill outline-dark">Client Outcomes</span>
+      <h2>Trusted by teams<br>winning complex contracts</h2>
+    </div>
+    <div class="test-grid">
+
+      <div class="test-card reveal">
+        <div class="test-stars">
+          <svg class="test-star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="test-star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="test-star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="test-star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="test-star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="test-quote">We had never considered entering US government tenders before — it just seemed too complex. But with targeted AI-driven support, we've been able to navigate the process with confidence.</p>
+        <div class="test-attr">
+          <span class="test-name">Energy Solutions Provider</span>
+          <span class="test-role">Federal Procurement · Energy Sector</span>
+        </div>
+      </div>
+
+      <div class="test-card reveal" style="transition-delay:0.1s">
+        <div class="test-stars">
+          <svg class="test-star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="test-star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="test-star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="test-star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="test-star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="test-quote">Felix helped cut through the clutter. It's easier now to find energy and infrastructure tenders we can realistically compete for.</p>
+        <div class="test-attr">
+          <span class="test-name">Grid Equipment Supplier</span>
+          <span class="test-role">Municipal Sourcing · Grid Infrastructure</span>
+        </div>
+      </div>
+
+      <div class="test-card reveal" style="transition-delay:0.2s">
+        <div class="test-stars">
+          <svg class="test-star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="test-star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="test-star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="test-star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="test-star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="test-quote">Their process is practical — helping us match capabilities to projects across federal and municipal procurement.</p>
+        <div class="test-attr">
+          <span class="test-name">Infrastructure Services Firm</span>
+          <span class="test-role">Defense &amp; Infrastructure · Federal Contracts</span>
+        </div>
       </div>
 
     </div>
