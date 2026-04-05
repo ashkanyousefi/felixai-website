@@ -9,6 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" href="https://cdn.prod.website-files.com/67eb80c47a25d3e92cd80f34/67ee3de2fb2b04d59e45431a_felix-256.png" />
+  <!-- reCAPTCHA API -->
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -52,7 +54,7 @@
       font-family: 'DM Serif Display', serif;
       font-weight: 400;
       font-size: clamp(48px, 6.5vw, 92px);
-      line-height: 1.0;
+      line-height: 1.15;
       letter-spacing: -0.04em;
     }
     h2 {
@@ -260,12 +262,12 @@
 
     /* Word reveal animation */
     .hero-heading { overflow: visible; }
-    .word-wrap { display: inline-block; overflow: hidden; vertical-align: top; margin-right: 0.22em; }
+    .word-wrap { display: inline-block; overflow: hidden; vertical-align: top; margin-right: 0.25em; }
     .word-inner {
       display: inline-block;
       transform: translateY(110%);
       opacity: 0;
-      transition: transform 0.9s cubic-bezier(0.16,1,0.3,1), opacity 0.5s ease;
+      transition: transform 0.7s cubic-bezier(0.22,1,0.36,1), opacity 0.4s ease;
     }
     .word-inner.revealed { transform: translateY(0); opacity: 1; }
     .hero-italic { font-style: italic; color: var(--black); }
@@ -709,6 +711,44 @@
     @media (max-width: 1024px) { .footer-top { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
     @media (max-width: 768px) { :root { --section-y: 88px; --pad-x: 24px; } }
+
+    /* ════════════════════════
+       CONTACT — OFF-WHITE
+    ════════════════════════ */
+    #contact {
+      background: var(--off-white);
+      padding: var(--section-y) 0;
+      border-top: 1px solid rgba(0,0,0,0.07);
+    }
+    .contact-wrap { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--pad-x); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 100px; align-items: start; }
+    .contact-left { display: flex; flex-direction: column; gap: 24px; }
+    .contact-left h2 { margin-top: 12px; }
+    .contact-desc { font-size: 15px; color: var(--text-muted-light); line-height: 1.75; }
+    .contact-form { display: flex; flex-direction: column; gap: 16px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-field { display: flex; flex-direction: column; gap: 6px; }
+    .form-field label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted-light); }
+    .form-field input, .form-field textarea {
+      background: var(--white);
+      border: 1px solid rgba(0,0,0,0.12);
+      border-radius: 10px;
+      padding: 13px 16px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: var(--black);
+      transition: border-color 0.2s;
+      outline: none;
+      width: 100%;
+    }
+    .form-field input:focus, .form-field textarea:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(0,56,255,0.08); }
+    .form-field textarea { resize: vertical; min-height: 120px; }
+    .form-captcha { margin-top: 4px; }
+    .form-submit { margin-top: 4px; }
+    @media (max-width: 860px) {
+      .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+      .form-row { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -724,8 +764,9 @@
       <li><a href="#case-studies">Case Studies</a></li>
       <li><a href="#about">About Us</a></li>
       <li><a href="#articles">Insights</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
-    <a href="mailto:ash@felixfusion.ai" class="btn-blue nav-cta">Let's talk</a>
+    <a href="#contact" class="btn-blue nav-cta">Let's talk</a>
     <button class="nav-hamburger" id="hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
@@ -736,7 +777,7 @@
   <a href="#case-studies" onclick="closeMobileNav()">Case Studies</a>
   <a href="#about" onclick="closeMobileNav()">About</a>
   <a href="#articles" onclick="closeMobileNav()">Insights</a>
-  <a href="mailto:ash@felixfusion.ai" class="btn-blue" style="width:fit-content">Let's talk</a>
+  <a href="#contact" onclick="closeMobileNav()" class="btn-blue" style="width:fit-content">Let's talk</a>
 </div>
 
 <!-- ════════════════════════════ HERO ════════════════════════════ -->
@@ -746,14 +787,14 @@
       <div class="hero-dot"></div>
       <span class="hero-eyebrow-text">San Francisco, California</span>
     </div>
-    <h1 class="hero-heading" id="hero-heading" aria-label="Bespoke AI Agent Systems for Energy &amp; Infrastructure">
+    <h1 class="hero-heading" id="hero-heading" aria-label="Systems for Energy and Supply Chain">
       <!-- words injected by JS -->
     </h1>
     <div class="hero-sub reveal" style="transition-delay:0.6s">
       <p class="hero-sub-text">We architect multi-agent systems that automate entire workflows end-to-end — from data ingestion to decision output. No off-the-shelf tools. No 18-month timelines. Just working systems that transform operations.</p>
       <div class="hero-cta-group">
-        <a href="mailto:ash@felixfusion.ai" class="btn-blue">
-          Let's talk
+        <a href="#contact" class="btn-blue">
+          Get in Touch
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
         <a href="#case-studies" class="arrow-link on-light">
@@ -779,12 +820,12 @@
       <div class="stat-label">Decisions Optimized</div>
     </div>
     <div class="stat-cell reveal" style="transition-delay:0.2s">
-      <div class="stat-val"><span>97</span>%</div>
-      <div class="stat-label">Model Accuracy</div>
+      <div class="stat-val"><span>70</span>%</div>
+      <div class="stat-label">Less Manual Workload</div>
     </div>
     <div class="stat-cell reveal" style="transition-delay:0.3s">
-      <div class="stat-val"><span>24</span>/7</div>
-      <div class="stat-label">Autonomous Operations</div>
+      <div class="stat-val"><span>6</span>×</div>
+      <div class="stat-label">Faster Procurement Cycles</div>
     </div>
   </div>
 </div>
@@ -855,10 +896,10 @@
           <div class="cs-card-img-overlay"></div>
         </div>
         <div class="cs-card-body">
-          <div class="cs-card-tag"><span class="tag-pill outline">Infrastructure</span></div>
-          <div class="cs-card-title">AI-Powered Procurement Intelligence for Public Sector</div>
-          <div class="cs-card-desc">Multi-stage tender analysis pipeline ingesting thousands of government solicitations, scoring fit, and automating bid package assembly for technology suppliers.</div>
-          <span class="cs-card-metric">3× Pipeline Throughput, 60% Less Review</span>
+          <div class="cs-card-tag"><span class="tag-pill outline">Public Sector</span></div>
+          <div class="cs-card-title">Autonomous Sourcing Agents for Federal &amp; Municipal Procurement</div>
+          <div class="cs-card-desc">Multi-agent pipeline ingesting federal and municipal solicitations, applying intelligent reasoning to score supplier fit, enforce ESG &amp; sustainability compliance, and automate bid package assembly — at scale.</div>
+          <span class="cs-card-metric">70% Less Manual Workload · 6× Faster Cycles</span>
         </div>
       </div>
 
@@ -876,7 +917,7 @@
       </div>
       <div class="svc-top-right reveal" style="transition-delay:0.15s">
         <div class="svc-subtitle">The AI Transformation Program</div>
-        <p class="svc-desc">We architect multi-agent systems that handle complete workflows from intake to execution to reporting — tailored to the physics, economics, and constraints of your domain. No off-the-shelf tools. No armies of junior consultants.</p>
+        <p class="svc-desc">We architect multi-agent systems that handle complete workflows from intake to execution to reporting — across energy grid modernization, public sector procurement, federal &amp; municipal sourcing, and defense &amp; infrastructure. Autonomous sourcing agents with intelligent reasoning at scale. No off-the-shelf tools. No armies of junior consultants.</p>
       </div>
     </div>
 
@@ -893,9 +934,9 @@
         <div class="svc-item-body">
           <div class="svc-item-body-inner">
             <div class="svc-item-content">
-              <p class="svc-item-text">We map your operational topology to identify high-value friction points suitable for agentic automation. Not a questionnaire — a technical deep-dive with your subject matter experts. You leave with a clear picture of where AI agents generate ROI and how to build toward it.</p>
-              <a href="mailto:ash@felixfusion.ai" class="arrow-link on-dark">
-                Discover more
+              <p class="svc-item-text">We map your operational topology to identify high-value friction points suitable for agentic automation — from government contracting workflows to energy grid operations. Not a questionnaire — a technical deep-dive with your subject matter experts. You leave with a clear picture of where autonomous sourcing agents generate ROI and how to build toward procurement digitalization.</p>
+              <a href="#contact" class="arrow-link on-dark">
+                Get in touch
                 <span class="arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
               </a>
             </div>
@@ -915,8 +956,8 @@
           <div class="svc-item-body-inner">
             <div class="svc-item-content">
               <p class="svc-item-text">Design of the agent system — tool definitions, deterministic guardrails, human-in-the-loop protocols, and integration maps. Validated with your data in days, not months. Every design decision is made with your team's operational reality in mind.</p>
-              <a href="mailto:ash@felixfusion.ai" class="arrow-link on-dark">
-                Discover more
+              <a href="#contact" class="arrow-link on-dark">
+                Get in touch
                 <span class="arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
               </a>
             </div>
@@ -936,8 +977,8 @@
           <div class="svc-item-body-inner">
             <div class="svc-item-content">
               <p class="svc-item-text">Agile implementation using our proprietary agent framework. Rigorous testing against edge cases and failure modes. We build for the physics of your domain — whether that's grid constraints, regulatory frameworks, or procurement logic — not generic AI patterns.</p>
-              <a href="mailto:ash@felixfusion.ai" class="arrow-link on-dark">
-                Discover more
+              <a href="#contact" class="arrow-link on-dark">
+                Get in touch
                 <span class="arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
               </a>
             </div>
@@ -957,8 +998,8 @@
           <div class="svc-item-body-inner">
             <div class="svc-item-content">
               <p class="svc-item-text">CI/CD pipeline handover, infrastructure integration, and ongoing performance monitoring. We track model drift, retrain on new data, and evolve your agent systems as your operations change. Your AI workforce gets smarter over time.</p>
-              <a href="mailto:ash@felixfusion.ai" class="arrow-link on-dark">
-                Discover more
+              <a href="#contact" class="arrow-link on-dark">
+                Get in touch
                 <span class="arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
               </a>
             </div>
@@ -977,9 +1018,9 @@
         <div class="svc-item-body">
           <div class="svc-item-body-inner">
             <div class="svc-item-content">
-              <p class="svc-item-text">Our agents connect directly to your systems — ERP, SCADA, market feeds, grid models — reading, writing, and executing workflows without migration or platform changes. SOC 2 compliant, multi-tenant, API-first. No ripping and replacing what works.</p>
-              <a href="mailto:ash@felixfusion.ai" class="arrow-link on-dark">
-                Discover more
+              <p class="svc-item-text">Our agents connect directly to your systems — ERP, procurement platforms, SCADA, market feeds, grid models — reading, writing, and executing workflows without migration or platform changes. Built for supplier engagement optimization, ESG &amp; sustainability compliance tracking, and federal sourcing rules. SOC 2 compliant, multi-tenant, API-first.</p>
+              <a href="#contact" class="arrow-link on-dark">
+                Get in touch
                 <span class="arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
               </a>
             </div>
@@ -999,8 +1040,8 @@
           <div class="svc-item-body-inner">
             <div class="svc-item-content">
               <p class="svc-item-text">Real-time dashboards and decision interfaces built for operators, analysts, and executives who need clarity in complex systems. We surface the right insight at the right moment — grid dispatch windows, cost outliers, compliance flags — before they become problems.</p>
-              <a href="mailto:ash@felixfusion.ai" class="arrow-link on-dark">
-                Discover more
+              <a href="#contact" class="arrow-link on-dark">
+                Get in touch
                 <span class="arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
               </a>
             </div>
@@ -1011,7 +1052,7 @@
     </div>
 
     <div class="svc-footer-link reveal" style="margin-top:48px">
-      <a href="mailto:ash@felixfusion.ai" class="arrow-link on-dark">
+      <a href="#contact" class="arrow-link on-dark">
         Start your AI transformation
         <span class="arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </a>
@@ -1026,27 +1067,28 @@
       <div class="about-left reveal">
         <span class="tag-pill outline-dark">About Us</span>
         <h2>Collaborate with a trusted AI partner</h2>
-        <p class="about-desc">FelixFusion is an AI systems firm based in San Francisco, California. We partner with energy and infrastructure enterprises to architect bespoke multi-agent systems — not chatbots, not wrappers, but production-grade AI workforces that run 24/7 inside your operations.</p>
-        <p class="about-desc">We're a lean, senior team. Every project is led by domain experts who understand grid physics, market structures, and regulatory environments — not just transformer architectures.</p>
+        <p class="about-desc">FelixFusion is an AI systems firm based in San Francisco, California. We partner with energy enterprises, government contractors, and infrastructure operators to architect bespoke multi-agent systems — not chatbots, not wrappers, but production-grade AI workforces that run 24/7 inside your operations.</p>
+        <p class="about-desc">We're a lean, senior team. Every project is led by domain experts who understand grid physics, public sector procurement rules, federal &amp; municipal sourcing requirements, and regulatory environments — not just transformer architectures.</p>
         <div class="about-sf">
           <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
           San Francisco, California
         </div>
-        <a href="mailto:ash@felixfusion.ai" class="arrow-link on-light" style="margin-top:8px">
+        <a href="#contact" class="arrow-link on-light" style="margin-top:8px">
           Get in touch
           <span class="arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
         </a>
       </div>
       <div class="about-right reveal" style="transition-delay:0.2s">
-        <div class="team-card">
-          <div class="team-avatar">AY</div>
-          <div class="team-info">
-            <div class="team-name">Ashkan Yousefi</div>
-            <div class="team-title">CEO &amp; Founder</div>
-            <a href="https://linkedin.com/in/ashkanyousefi" target="_blank" rel="noopener" class="team-li">
-              <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-              LinkedIn
-            </a>
+        <div class="why-grid" style="grid-template-columns:1fr;gap:16px">
+          <div class="why-card" style="background:var(--gray-light)">
+            <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+            <h3>Domain-First Approach</h3>
+            <p style="font-size:14px;color:var(--text-muted-light);line-height:1.7">We combine AI engineering with deep domain knowledge in energy grid modernization, defense &amp; infrastructure, and government contracting — delivering intelligent reasoning at scale.</p>
+          </div>
+          <div class="why-card" style="background:var(--gray-light)">
+            <div class="why-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+            <h3>Proven at Scale</h3>
+            <p style="font-size:14px;color:var(--text-muted-light);line-height:1.7">Our autonomous sourcing agents have optimized over $2B in decisions, cutting manual workload by 70% and accelerating procurement cycles 6× for federal &amp; municipal clients.</p>
           </div>
         </div>
       </div>
@@ -1180,12 +1222,63 @@
         <p>Schedule a technical audit to discover where AI agents can create the most impact for your organization. Audit to autonomous in 6–8 weeks.</p>
       </div>
       <div class="cta-actions reveal" style="transition-delay:0.2s">
-        <a href="mailto:ash@felixfusion.ai" class="btn-white">
-          Schedule a call
+        <a href="#contact" class="btn-white">
+          Get in Touch
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
-        <span style="font-size:13px; color:rgba(255,255,255,0.6)">ash@felixfusion.ai</span>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════ CONTACT ════════════════════════════ -->
+<!-- Replace test reCAPTCHA key with real key from https://www.google.com/recaptcha/admin -->
+<section id="contact">
+  <div class="contact-wrap">
+    <div class="contact-grid">
+      <div class="contact-left reveal">
+        <span class="tag-pill outline-dark">Get in Touch</span>
+        <h2>Let's build something that works</h2>
+        <p class="contact-desc">Ready to modernize your procurement operations, automate government contracting workflows, or deploy autonomous sourcing agents across energy and supply chain? Tell us about your challenge and we'll get back to you within one business day.</p>
+        <div class="about-sf" style="margin-top:8px">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          149 New Montgomery St, San Francisco, CA
+        </div>
+      </div>
+      <form class="contact-form reveal" style="transition-delay:0.15s" action="https://formsubmit.co/ash@felixfusion.ai" method="POST" id="contact-form">
+        <!-- Formsubmit hidden config -->
+        <input type="hidden" name="_subject" value="New Contact from FelixFusion.ai" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_next" value="https://felixfusion.ai" />
+        <input type="hidden" name="_template" value="table" />
+        <div class="form-row">
+          <div class="form-field">
+            <label for="f-name">Name *</label>
+            <input type="text" id="f-name" name="name" placeholder="Your name" required />
+          </div>
+          <div class="form-field">
+            <label for="f-email">Email *</label>
+            <input type="email" id="f-email" name="email" placeholder="you@company.com" required />
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="f-company">Company</label>
+          <input type="text" id="f-company" name="company" placeholder="Your organization" />
+        </div>
+        <div class="form-field">
+          <label for="f-message">Message *</label>
+          <textarea id="f-message" name="message" placeholder="Tell us about your challenge — procurement automation, energy grid operations, federal sourcing, or something else..." required></textarea>
+        </div>
+        <div class="form-captcha">
+          <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MhrdAiDB"></div>
+        </div>
+        <div class="form-submit">
+          <button type="submit" class="btn-blue" style="width:100%; justify-content:center">
+            Send Message
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </section>
@@ -1209,7 +1302,7 @@
           <li><a href="#services">Services</a></li>
           <li><a href="#case-studies">Case Studies</a></li>
           <li><a href="#about">About Us</a></li>
-          <li><a href="mailto:ash@felixfusion.ai">Contact</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
 
@@ -1225,11 +1318,11 @@
       </div>
 
       <div class="footer-col">
-        <h5>Connect</h5>
+        <h5>Work With Us</h5>
         <ul>
-          <li><a href="mailto:ash@felixfusion.ai">ash@felixfusion.ai</a></li>
-          <li><a href="https://www.linkedin.com/company/felixfusion" target="_blank" rel="noopener">LinkedIn</a></li>
-          <li><a href="https://x.com/felixfusion" target="_blank" rel="noopener">X / Twitter</a></li>
+          <li><a href="#contact">Get in Touch</a></li>
+          <li><a href="#case-studies">Case Studies</a></li>
+          <li><a href="#articles">Insights</a></li>
         </ul>
       </div>
     </div>
@@ -1240,14 +1333,6 @@
         <a href="#">Privacy Policy</a>
         <a href="#">Cookie Notice</a>
       </div>
-      <div class="footer-social">
-        <a href="https://www.linkedin.com/company/felixfusion" target="_blank" rel="noopener" class="footer-social-link" aria-label="LinkedIn">
-          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-        </a>
-        <a href="https://x.com/felixfusion" target="_blank" rel="noopener" class="footer-social-link" aria-label="X / Twitter">
-          <svg viewBox="0 0 24 24" fill="none"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.736-8.857L2.25 2.25h6.886l4.259 5.631 5.849-5.631Z" stroke="rgba(255,255,255,0.5)" stroke-width="0.5" fill="rgba(255,255,255,0.5)"/></svg>
-        </a>
-      </div>
     </div>
   </div>
 </footer>
@@ -1256,17 +1341,17 @@
 /* ── HERO WORD REVEAL ── */
 (function() {
   const heading = document.getElementById('hero-heading');
-  const text = 'Bespoke AI Agent Systems for Energy & Infrastructure';
-  // Mark "AI Agent Systems" as italic
-  const italicStart = 9; // word index (0-based)
-  const italicEnd = 11;
+  const text = 'Systems for Energy and Supply Chain';
+  // "Energy and Supply Chain" = words 2–5 (0-based)
+  const italicStart = 2;
+  const italicEnd = 5;
   const words = text.split(' ');
   let html = '';
   words.forEach((word, i) => {
     const inner = (i >= italicStart && i <= italicEnd)
       ? `<em class="hero-italic">${word}</em>`
       : word;
-    html += `<span class="word-wrap"><span class="word-inner" style="transition-delay:${(i * 0.07 + 0.1).toFixed(2)}s">${inner}</span></span> `;
+    html += `<span class="word-wrap"><span class="word-inner" style="transition-delay:${(i * 0.1 + 0.1).toFixed(2)}s">${inner}</span></span> `;
   });
   heading.innerHTML = html.trim();
 
@@ -1352,6 +1437,18 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
   });
 });
+
+/* ── CONTACT FORM: BLOCK SUBMIT IF RECAPTCHA NOT CHECKED ── */
+(function() {
+  const form = document.getElementById('contact-form');
+  if (!form) return;
+  form.addEventListener('submit', function(e) {
+    if (typeof grecaptcha !== 'undefined' && !grecaptcha.getResponse()) {
+      e.preventDefault();
+      alert('Please verify you are not a robot before sending.');
+    }
+  });
+})();
 </script>
 </body>
 </html>
